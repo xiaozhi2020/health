@@ -15,8 +15,10 @@
     </bean>
     <!--3.1spring和mybatis整合的工厂bean-->
     <bean class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!--导入sqlMapConfig配置-->
         <property name="configLocation" value="classpath:sqlMapConfig.xml"/>
         <property name="dataSource" ref="dataSource"/>
+        <property name="typeAliasesPackage" value="cn.itcast.pojo"/>
     </bean>
     <!--3.2批量扫描接口生成代理对象-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">

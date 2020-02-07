@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.itcast.dao.CheckGroupDao">
+    <!--1.添加检查组-->
+    <insert id="add" parameterType="checkGroup" useGeneratedKeys="true" keyProperty="id" keyColumn="id" >
+        insert into t_checkgroup(code,name,helpCode,sex,remark,attention)
+        values (#{code},#{name},#{helpCode},#{sex},#{remark},#{attention})
+    </insert>
+    <!--1.1添加检查组关联检查项-->
+    <insert id="setCheckGroupAndCheckItem" parameterType="map">
+        insert into t_checkgroup_checkitem(checkgroup_id,checkitem_id)
+        values (#{checkGroupId},#{checkItemId})
+    </insert>
+
+    <!--2.检查组分页-->
+    <select id="findPage" parameterType="string" resultType="checkGroup" >
+        select * from t_checkgroup
+        <where>
+            <if test="value!=null and value.length>0">
+                code=#{code} or name=#{name} or helpCode=#{helpCode}
+            </if>
+        </where>
+    </select>
+    <!--3.编辑的回显检查项-->
+    <select id="findById" parameterType="int" resultType="checkGroup">
+        select * from t_checkgroup where id=#{id}
+    </select>
+    <!--3.1上面执行成功时候,前端才会发送此请求 然后返回的关联项的id-->
+    <select id="findCheckItemIdsByCheckGroupId" parameterType="int" resultType="int">
+        select checkitem_id from t_checkgroup_checkitem  where checkgroup_id=#{id}
+    </select>
+    <!--4.1修改信息-->
+    <update id="edit" parameterType="checkGroup">
+        update t_checkgroup
+        <set>
+            <if test="code!=null">
+                code=#{code},
+            </if>
+            <if test="name!=null">
+                name=#{name},
+            </if>
+            <if test="sex!=null">
+                sex=#{sex},
+            </if>
+            <if test="remark!=null">
+                remark=#{remark},
+            </if>
+            <if test="attention!=null">
+                attention=#{attention},
+            </if>
+            <if test="helpCode!=null">
+                helpCode=#{helpCode},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+    <!--4.2清除与检查项的关联-->
+    <delete id="deleteCheckItemAssocication"  parameterType="int">
+        delete from t_checkgroup_checkitem checkgroup_id=#{id}
+    </delete>
+
+    <!--5.1查看有无关联检查项-->
+    <select id="findCheckItemCount" parameterType="int" resultType="int">
+        select count(*) from t_checkgroup_checkitem where checkgroup_id=#{id}
+    </select>
+    <!--5.1查看有无关联检查项-->
+    <select id="findSetmeslCount" parameterType="int" resultType="int">
+        select count(*) from t_setmeal_checkgroup where checkgroup_id=#{id}
+    </select>
+    <delete id="delete" parameterType="int">
+        delete from t_checkgroup where id=#{id}
+    </delete>
+</mapper>

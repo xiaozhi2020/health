@@ -12,9 +12,6 @@
     <artifactId>health_backend</artifactId>
     <packaging>war</packaging>
 
-    <name>health_backend Maven Webapp</name>
-    <!-- FIXME change it to the project's website -->
-    <url>http://www.example.com</url>
 
     <dependencies>
         <dependency>
@@ -31,6 +28,7 @@
                 <version>2.2</version>
                 <configuration>
                     <port>82</port>
+                    <path>/</path>
                 </configuration>
             </plugin>
         </plugins>
