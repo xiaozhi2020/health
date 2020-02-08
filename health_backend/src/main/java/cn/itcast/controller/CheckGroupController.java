@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import java.util.List;
 
 @RestController
@@ -105,7 +106,7 @@ public class CheckGroupController {
     public Result delete(Integer id){
         try {
            String str = checkGroupService.delete(id);
-           if (str!=null){
+           if (str==null){
                return new Result(false, MessageConstant.DELETE_CHECKGROUP_FAIL_BECAUSE_ASSOCIATION);
            }
         } catch (Exception e) {
@@ -114,5 +115,17 @@ public class CheckGroupController {
         }
         return new Result(true, MessageConstant.DELETE_CHECKGROUP_SUCCESS);
     }
-
+    /**
+     * 查询所有检查组,套餐要显示
+     */
+    @RequestMapping("/findAll")
+    public Result findAll(){
+        try {
+            List<CheckGroup> checkGroupList= checkGroupService.findAll();
+            return new Result(true, MessageConstant.QUERY_CHECKGROUP_SUCCESS,checkGroupList);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Result(false, MessageConstant.QUERY_CHECKGROUP_FAIL);
+        }
+    }
 }

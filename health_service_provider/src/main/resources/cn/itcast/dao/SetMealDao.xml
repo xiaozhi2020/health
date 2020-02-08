@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.itcast.dao.SetMealDao">
+    <!--1.1新增套餐-->
+    <insert id="add" parameterType="setMeal" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        insert into t_checkgroup(code,name,helpCode,sex,remark,attention,age,price,img)
+        values (#{code},#{name},#{helpCode},#{sex},#{remark},#{attention},#{age},#{price},#{img})
+    </insert>
+    <!--1.2新增套餐关联检查组-->
+    <insert id="setSetMealAndCheckGroup" parameterType="map">
+        insert into t_setmeal_checkgroup(setmeal_id,checkgroup_id) values (#{setMealId},#{checkGroupId})
+    </insert>
+</mapper>

@@ -27,4 +27,6 @@ public interface CheckGroupDao {
     int findSetmeslCount(Integer id);
     //5.3删除检查组
     void delete(Integer id);
+    //6.查询所有检查组,套餐要显示
+    List<CheckGroup> findAll();
 }

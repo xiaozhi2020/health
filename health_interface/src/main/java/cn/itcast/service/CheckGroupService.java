@@ -19,4 +19,7 @@ public interface CheckGroupService {
     void edit(CheckGroup checkGroup, Integer[] checkItemIds);
     //5.删除检查组
     String delete(Integer id);
+    //6.查询所有检查组,套餐要显示
+    List<CheckGroup> findAll();
+
 }

@@ -104,6 +104,15 @@ public class CheckGroupServiceImpl implements CheckGroupService {
     }
 
     /**
+     * 查询所有检查组,套餐要显示
+     * @return
+     */
+    @Override
+    public List<CheckGroup> findAll() {
+        return checkGroupDao.findAll();
+    }
+
+    /**
      * 封装检查组与检查项多对多的关系
      * @param checkGroup
      * @param checkItemIds

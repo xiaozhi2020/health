@@ -58,7 +58,7 @@
     </update>
     <!--4.2清除与检查项的关联-->
     <delete id="deleteCheckItemAssocication"  parameterType="int">
-        delete from t_checkgroup_checkitem checkgroup_id=#{id}
+        delete from t_checkgroup_checkitem where checkgroup_id=#{id}
     </delete>
 
     <!--5.1查看有无关联检查项-->
@@ -72,4 +72,9 @@
     <delete id="delete" parameterType="int">
         delete from t_checkgroup where id=#{id}
     </delete>
+
+    <!--6.查询所有检查组,套餐要显示-->
+    <select id="findAll" resultType="checkGroup">
+        select * from t_checkgroup
+    </select>
 </mapper>
