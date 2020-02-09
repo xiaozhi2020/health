@@ -5,11 +5,75 @@
 <mapper namespace="cn.itcast.dao.SetMealDao">
     <!--1.1新增套餐-->
     <insert id="add" parameterType="setMeal" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
-        insert into t_checkgroup(code,name,helpCode,sex,remark,attention,age,price,img)
+        insert into t_setmeal(code,name,helpCode,sex,remark,attention,age,price,img)
         values (#{code},#{name},#{helpCode},#{sex},#{remark},#{attention},#{age},#{price},#{img})
     </insert>
     <!--1.2新增套餐关联检查组-->
     <insert id="setSetMealAndCheckGroup" parameterType="map">
         insert into t_setmeal_checkgroup(setmeal_id,checkgroup_id) values (#{setMealId},#{checkGroupId})
     </insert>
+    <!--2.套餐分页查询-->
+    <select id="findPage" parameterType="string" resultType="setMeal">
+        select * from t_setmeal
+        <where>
+            <if test="value !=null and value.length>0">
+                code=#{code} or name=#{name} or helpCode=#{helpCode}
+            </if>
+        </where>
+    </select>
+    <!--3.1编辑套餐回显基本信息-->
+    <select id="findById" parameterType="int" resultType="setMeal">
+        select * from t_setmeal where id=#{id}
+    </select>
+    <!--3.2编辑套餐回显被选中套餐组-->
+    <select id="findCheckGroupIdsBySetMealId" resultType="int" parameterType="int">
+        select checkgroup_id from t_setmeal_checkgroup where setmeal_id=#{id}
+    </select>
+    <!--4.1编辑套餐-->
+    <update id="edit" parameterType="setMeal">
+        update t_setmeal
+        <set>
+            <if test="code!=null">
+                code=#{code},
+            </if>
+            <if test="name!=null">
+                name=#{name},
+            </if>
+            <if test="sex!=null">
+                sex=#{sex},
+            </if>
+            <if test="age!=null">
+                age=#{age},
+            </if>
+            <if test="price!=null">
+                price=#{price},
+            </if>
+            <if test="helpCode!=null">
+                helpCode=#{helpCode},
+            </if>
+            <if test="attention!=null">
+                attention=#{attention},
+            </if>
+            <if test="remark!=null">
+                remark=#{remark},
+            </if>
+            <if test="img!=null">
+                img=#{img}
+            </if>
+
+        </set>
+        where id=#{id}
+    </update>
+    <!--4.2删除关联-->
+    <delete id="deleteAssociation" parameterType="int" >
+        delete from t_setmeal_checkgroup where setmeal_id=#{id}
+    </delete>
+    <!--5.1删除套餐前检查他的关联-->
+    <select id="findCheckGroupCountBySetMealId" parameterType="int" resultType="int">
+        select count(*) from t_setmeal_checkgroup where setmeal_id=#{id}
+    </select>
+    <!--5.2删除套餐-->
+    <delete id="delete" parameterType="int">
+        delete from t_setmeal where setmeal_id=#{id}
+    </delete>
 </mapper>

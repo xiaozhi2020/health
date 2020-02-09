@@ -29,7 +29,7 @@ public class CheckGroupServiceImpl implements CheckGroupService {
     @Override
     public void add(CheckGroup checkGroup, Integer[] checkItemIds) {
         checkGroupDao.add(checkGroup);
-        setCheckGroupAndCheckGroup(checkGroup,checkItemIds);
+        setCheckGroupAndCheckItem(checkGroup,checkItemIds);
     }
 
     /**
@@ -81,7 +81,7 @@ public class CheckGroupServiceImpl implements CheckGroupService {
         //2.清除与检查项的关联
         checkGroupDao.deleteCheckItemAssocication(checkGroup.getId());
         //3.重新建立关联:与add不同的是这是有id的,而add需要在xml中设置
-        setCheckGroupAndCheckGroup(checkGroup,checkItemIds);
+        setCheckGroupAndCheckItem(checkGroup,checkItemIds);
     }
 
     /**
@@ -117,7 +117,7 @@ public class CheckGroupServiceImpl implements CheckGroupService {
      * @param checkGroup
      * @param checkItemIds
      */
-    public void setCheckGroupAndCheckGroup(CheckGroup checkGroup, Integer[] checkItemIds){
+    public void setCheckGroupAndCheckItem(CheckGroup checkGroup, Integer[] checkItemIds){
         Integer checkGroupId = checkGroup.getId();
         for (Integer checkItemId : checkItemIds) {
             Map<String,Integer> map = new HashMap<>();

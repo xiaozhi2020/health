@@ -67,5 +67,10 @@ public class MessageConstant {
     /*自己加的*/
     public static final String DELETE_CHECKItem_FAIL_BECAUSE_ASSOCIATION = "删除检查项带有关联组";
     public static final String DELETE_CHECKGROUP_FAIL_BECAUSE_ASSOCIATION = "删除检查组带有关联项以及套餐";
+    public static final String DELETE_SETMEAL_FAIL_BECAUSE_ASSOCIATION = "删除套餐带有检查组";
+    public static final String EDIT_SETMEAL_FAIL = "编辑套餐项失败";
+    public static final String EDIT_SETMEAL_SUCCESS = "编辑套餐项成功";
+    public static final String DELETE_SETMEAL_FAIL = "删除套餐失败";
+    public static final String DELETE_SETMEAL_SUCCESS = "删除套餐成功";
 }
 
