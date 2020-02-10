@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.itcast.dao.OrderSettingDao">
+    <!--1.查询该时间点个数-->
+    <select id="findCountByOrderDate" parameterType="date" resultType="long">
+        select * from t_ordersetting where orderDate=#{orderDate}
+    </select>
+    <!--2.根据1没有就添加-->
+    <insert id="add" parameterType="orderSetting" >
+        insert into t_ordersetting (orderDate, number, reservations)
+        values (#{orderDate},#{number},#{reservations})
+    </insert>
+    <!--3.根据1有就修改-->
+    <update id="editNumberByOrderDate" parameterType="orderSetting" >
+        update t_ordersetting
+        <set>
+            number = #{number}
+        </set>
+        where orderDate=#{orderDate}
+    </update>
+    <!--4获取批量导入数据 换了一种写法,可以模糊查询和用课程的between-->
+    <select id="getOrderSettingByMonth" parameterType="string" resultType="orderSetting">
+        SELECT DATE_FORMAT( orderDate,'%d' ) AS date FROM t_ordersetting WHERE
+            DATE_FORMAT( orderDate, '%Y-%m' ) = '{value}'
+    </select>
+</mapper>

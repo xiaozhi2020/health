@@ -74,6 +74,6 @@
     </select>
     <!--5.2删除套餐-->
     <delete id="delete" parameterType="int">
-        delete from t_setmeal where setmeal_id=#{id}
+        delete from t_setmeal where id=#{id}
     </delete>
 </mapper>
