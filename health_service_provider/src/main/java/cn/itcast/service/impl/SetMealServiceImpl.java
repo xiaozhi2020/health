@@ -126,6 +126,25 @@ public class SetMealServiceImpl implements SetMealService {
     }
 
     /**
+     * 获取所有套餐,手机端需求
+     * @return
+     */
+    @Override
+    public List<Setmeal> getSetMeal() {
+        return setMealDao.getSetMeal();
+    }
+
+    /**
+     * 手机端套餐详情查询
+     * @param id
+     * @return
+     */
+    @Override
+    public Setmeal findDetailById(Integer id) {
+        return setMealDao.findDetailById(id);
+    }
+
+    /**
      * 封装新增套餐关联检查组
      * @param setmeal
      * @param checkGroupIds

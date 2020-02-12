@@ -5,6 +5,8 @@ import cn.itcast.entity.QueryPageBean;
 import cn.itcast.entity.Result;
 import cn.itcast.pojo.Setmeal;
 
+import java.util.List;
+
 public interface SetMealService {
     //1.新增套餐
     void add(Setmeal setmeal, Integer[] checkGroupIds);
@@ -18,4 +20,8 @@ public interface SetMealService {
     void edit(Setmeal setmeal, Integer[] checkGroupIds);
     //5.删除套餐
     String delete(Integer id);
+    //6.获取所有套餐 手机端需求
+    List<Setmeal> getSetMeal();
+    //7.手机端套餐详情查询
+    Setmeal findDetailById(Integer id);
 }

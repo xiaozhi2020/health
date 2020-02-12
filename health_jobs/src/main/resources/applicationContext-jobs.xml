@@ -14,8 +14,8 @@
 							http://www.springframework.org/schema/context/spring-context.xsd">
     <!--开启spring注解使用 -->
     <!--以前是包扫描,包含了这个注解,所以都可以用注解-->
-    <!--在springmvc中有个mvc:annotation-driver也包含了注解的 @Component 和 @AutoWriter 等等,当然功能不一样但是都可以达到用注解-->
-    <context:annotation-config></context:annotation-config>
+    <!--在springmvc中有个dubbo,当然功能不一样但是都可以达到用注解-->
+    <context:annotation-config></context:annotation-config><!--//这个注解和注解扫描的区别annotation-scan-->
     <!--注册自定义Job-->
     <bean id="clearImgJob" class="cn.itcast.jobs.ClearImgJob"></bean>
 

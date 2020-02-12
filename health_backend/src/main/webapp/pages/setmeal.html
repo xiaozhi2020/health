@@ -393,27 +393,27 @@ var vue = new Vue({
           return isJPG && isLt2M;
         },
         //编辑
-        handleEdit(){
-            this.$refs["dataEditForm"].validate(valid=>{
-                if (valid){
-                    axios.post("/setMeal/edit.do?checkGroupIds="+this.checkgroupIds, this.formData).then(res=>{
-                        if (res.data.flag) {
-                            this.$message.success(res.data.message)
-                            this.dialogFormVisible4Edit=false;
-                        }else {
-                            this.$message.error(res.data.message)
-                        }
-                    }).finally(()=>{
-                        this.findPage();
-                    })
-                }else {
-                    this.$message.error("表单数据校验失败!");
-                    return false;
-                }
-            })
-        },
-        //添加
-        handleAdd () {
+            handleEdit(){
+                this.$refs["dataEditForm"].validate(valid=>{
+                    if (valid){
+                        axios.post("/setMeal/edit.do?checkGroupIds="+this.checkgroupIds, this.formData).then(res=>{
+                            if (res.data.flag) {
+                                this.$message.success(res.data.message);
+                                this.dialogFormVisible4Edit=false;
+                            }else {
+                                this.$message.error(res.data.message);
+                            }
+                        }).finally(()=>{
+                            this.findPage();
+                        })
+                    }else {
+                        this.$message.error("表单数据校验失败!");
+                        return false;
+                    }
+                })
+            },
+            //添加
+            handleAdd () {
             this.$refs['dataAddForm'].validate(valid=>{
                 if (valid){
                     axios.post("/setMeal/add.do?checkGroupIds="+this.checkgroupIds,this.formData).then(res=>{

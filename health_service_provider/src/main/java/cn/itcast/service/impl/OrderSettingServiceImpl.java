@@ -46,12 +46,16 @@ public class OrderSettingServiceImpl implements OrderSettingService {
      */
     @Override
     public List<Map> getOrderSettingByMonth(String date) {
-       /* //模糊查询和老师的设置可不设置开始结束然后放入map集合 作为参数,这里就没用视频老师方法
-        String begin = date+"-1";
-        String end=date+"-31";*/
+        //模糊查询和老师的设置可不设置开始结束然后放入map集合 作为参数,这里就没用视频老师方法但是注意月份带0和不带0
+        String begin = date+"-01";
+        String end=date+"-31";
+        Map<String,String> m = new HashMap();
+        m.put("begin",begin);
+        m.put("end",end);
 
 
-        List<OrderSetting> orderSettingList = orderSettingDao.getOrderSettingByMonth(date);
+
+        List<OrderSetting> orderSettingList = orderSettingDao.getOrderSettingByMonth(m);
         List<Map> mapResult = new ArrayList<>();
         for (OrderSetting orderSetting : orderSettingList) {
             Map<String,Object> map = new HashMap<>();
@@ -61,5 +65,22 @@ public class OrderSettingServiceImpl implements OrderSettingService {
             mapResult.add(map);
         }
         return mapResult;
+    }
+
+    /**
+     * 可预约人数设置
+     * @param orderSetting
+     */
+    @Override
+    public void editNumberByDate(OrderSetting orderSetting) {
+        //根据时间查询是否已经设置了预约人数
+        long count = orderSettingDao.findCountByOrderDate(orderSetting.getOrderDate());
+        if (count>0){
+            //有,走编辑
+            orderSettingDao.editNumberByOrderDate(orderSetting);
+        }else {
+            //无,走添加
+            orderSettingDao.add(orderSetting);
+        }
     }
 }

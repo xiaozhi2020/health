@@ -77,4 +77,21 @@
     <select id="findAll" resultType="checkGroup">
         select * from t_checkgroup
     </select>
+    <!--7.手机端查询详情_关联查询检查组-->
+    <resultMap id="baseResultMap" type="checkGroup">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="code" property="code"/>
+        <result column="helpCode" property="helpCode"/>
+        <result column="sex" property="sex"/>
+        <result column="remark" property="remark"/>
+        <result column="attention" property="attention"/>
+    </resultMap>
+    <resultMap id="findCheckGroupBySidResultMap" type="checkGroup" extends="baseResultMap">
+        <collection property="checkItems" ofType="checkItem" column="id"
+                    select="cn.itcast.dao.CheckItemDao.findCheckItemByCid"/>
+    </resultMap>
+    <select id="findCheckGroupBySid" parameterType="int" resultMap="findCheckGroupBySidResultMap">
+        select * from t_checkgroup where id in (select checkgroup_id from t_setmeal_checkgroup where setmeal_id=#{id})
+    </select>
 </mapper>

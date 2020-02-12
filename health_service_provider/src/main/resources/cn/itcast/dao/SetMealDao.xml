@@ -76,4 +76,32 @@
     <delete id="delete" parameterType="int">
         delete from t_setmeal where id=#{id}
     </delete>
+    <!--6.产寻所有套餐,手机端需求-->
+    <select id="getSetMeal" resultType="setMeal">
+        select * from t_setmeal
+    </select>
+    <!--7.手机端套餐详情查询-->
+    <resultMap id="baseResultMap" type="setMeal">
+    <!--<resultMap id="唯一的标识" type="映射的pojo对象">-->
+        <!--column="表的主键字段，或者可以为查询语句中的别名字段" jdbcType="字段类型" property="映射pojo对象的主键属性-->
+        <id column="id" property="id"/>
+        <!--<result column="表的一个字段（可以为任意表的一个字段）" jdbcType="字段类型" property="映射到pojo对象的一个属性（须为type定义的pojo对象中的一个属性）"/>-->
+        <result column="name" property="name"/>
+        <result column="code" property="code"/>
+        <result column="helpCode" property="helpCode"/>
+        <result column="sex" property="sex"/>
+        <result column="age" property="age"/>
+        <result column="price" property="price"/>
+        <result column="remark" property="remark"/>
+        <result column="attention" property="attention"/>
+        <result column="img" property="img"/>
+    </resultMap>
+    <resultMap id="findDetailByIdResultMap" type="setMeal" extends="baseResultMap">
+        <collection property="checkGroups" ofType="checkGroup" column="id"
+                    select="cn.itcast.dao.CheckGroupDao.findCheckGroupBySid"/>
+    </resultMap>
+
+    <select id="findDetailById" parameterType="int" resultMap="findDetailByIdResultMap">
+        select * from t_setmeal where id=#{id}
+    </select>
 </mapper>

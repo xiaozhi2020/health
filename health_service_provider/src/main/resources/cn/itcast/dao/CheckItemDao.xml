@@ -69,4 +69,8 @@
     <select id="findAll" resultType="checkItem">
         select * from t_checkItem
     </select>
+    <!--7.手机查询详情_关联价差组_检查组关联检查项-->
+    <select id="findCheckItemByCid" parameterType="int" resultType="checkItem">
+        select * from t_checkItem where id in (select checkitem_id from t_checkgroup_checkitem where checkgroup_id=#{cid})
+    </select>
 </mapper>

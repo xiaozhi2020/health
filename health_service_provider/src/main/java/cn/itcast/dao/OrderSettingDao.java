@@ -15,5 +15,5 @@ public interface OrderSettingDao {
     //1.3有数据修改
     public void editNumberByOrderDate(OrderSetting orderSetting);
     //2获取批量导入数据
-    List<OrderSetting> getOrderSettingByMonth(String date);
+    List<OrderSetting> getOrderSettingByMonth(Map map);
 }

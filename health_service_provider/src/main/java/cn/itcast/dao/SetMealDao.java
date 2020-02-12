@@ -3,6 +3,7 @@ package cn.itcast.dao;
 import cn.itcast.pojo.Setmeal;
 import com.github.pagehelper.Page;
 
+import java.util.List;
 import java.util.Map;
 
 public interface SetMealDao {
@@ -24,4 +25,8 @@ public interface SetMealDao {
     Integer findCheckGroupCountBySetMealId(Integer id);
     //5.2删除套餐
     void delete(Integer id);
+    //6.获取所有套餐,手机端需求
+    List<Setmeal> getSetMeal();
+    //7.手机端套餐详情查询-第一张表
+    Setmeal findDetailById(Integer id);
 }
