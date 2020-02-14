@@ -87,7 +87,7 @@
                                             
 											<template>
                                                 <template v-for="obj in leftobj">
-                                                    <template v-if="obj.date == dayobject.day.getDate()">
+                                                    <template v-if="obj.date == dayobject.day.getDate()"><!--这一天-->
                                                         <template v-if="obj.number > obj.reservations">
                                                             <div class="usual">
                                                                 <p>可预约{{obj.number}}人</p>

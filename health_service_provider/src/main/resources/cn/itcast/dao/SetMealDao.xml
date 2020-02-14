@@ -15,11 +15,13 @@
     <!--2.套餐分页查询-->
     <select id="findPage" parameterType="string" resultType="setMeal">
         select * from t_setmeal
-        <where>
-            <if test="value !=null and value.length>0">
-                code=#{code} or name=#{name} or helpCode=#{helpCode}
-            </if>
-        </where>
+<!--        <if test="value !=null and value.length>0 and value!='null' and value!='' ">-->
+<!--            where  code=#{value} or name=#{value} or helpCode=#{value}-->
+<!--        </if>-->
+        <if test="value != null and value.length > 0 and value!='null' and value!='' ">
+            where code = #{code} or name = #{name} or helpCode=#{helpCode}
+        </if>
+
     </select>
     <!--3.1编辑套餐回显基本信息-->
     <select id="findById" parameterType="int" resultType="setMeal">
@@ -103,5 +105,9 @@
 
     <select id="findDetailById" parameterType="int" resultMap="findDetailByIdResultMap">
         select * from t_setmeal where id=#{id}
+    </select>
+    <!--查询总个数-->
+    <select id="findAllCount" resultType="int">
+        select count(*) from t_setmeal
     </select>
 </mapper>

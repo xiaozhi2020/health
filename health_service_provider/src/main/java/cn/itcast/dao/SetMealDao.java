@@ -29,4 +29,6 @@ public interface SetMealDao {
     List<Setmeal> getSetMeal();
     //7.手机端套餐详情查询-第一张表
     Setmeal findDetailById(Integer id);
+    //8.查询总个数
+    Integer findAllCount();
 }
