@@ -72,5 +72,6 @@ public class MessageConstant {
     public static final String EDIT_SETMEAL_SUCCESS = "编辑套餐项成功";
     public static final String DELETE_SETMEAL_FAIL = "删除套餐失败";
     public static final String DELETE_SETMEAL_SUCCESS = "删除套餐成功";
+    public static final String VALIDATETELEPHONE_ERROR="手机号输入错误";
 }
 

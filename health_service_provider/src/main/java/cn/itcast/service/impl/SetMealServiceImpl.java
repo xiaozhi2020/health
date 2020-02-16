@@ -136,6 +136,10 @@ public class SetMealServiceImpl implements SetMealService {
             return null;
         }
         setMealDao.delete(id);
+        //第一步:获取回显时的对象,通过他获取回显的图片名字,然后去小集合里面删掉
+        Setmeal oldSetMeal = setMealDao.findById(id);
+        //第二部:删除这个对象存入小集合的旧的图片名字
+        jedisPool.getResource().srem(RedisConstant.SETMEAL_PIC_DB_RESOURCES,oldSetMeal.getImg());
         generateMobileStaticHtml();
         //删除后要将对应生成的静态文件一起删除
         File file = new File(outPutPath + "/" + "setmeal_detail_" + id + ".html");

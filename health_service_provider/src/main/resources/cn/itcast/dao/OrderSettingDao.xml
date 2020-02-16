@@ -3,16 +3,16 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.itcast.dao.OrderSettingDao">
-    <!--1.查询该时间点个数-->
+    <!--1.1查询该时间点个数-->
     <select id="findCountByOrderDate" parameterType="date" resultType="long">
         select count(*) from t_ordersetting where orderDate=#{orderDate}
     </select>
-    <!--2.根据1没有就添加-->
+    <!--1.2根据1没有就添加-->
     <insert id="add" parameterType="orderSetting" >
         insert into t_ordersetting (orderDate, number, reservations)
         values (#{orderDate},#{number},#{reservations})
     </insert>
-    <!--3.根据1有就修改-->
+    <!--1.3根据1有就修改-->
     <update id="editNumberByOrderDate" parameterType="orderSetting" >
         update t_ordersetting
         <set>
@@ -20,10 +20,22 @@
         </set>
         where orderDate=#{orderDate}
     </update>
-    <!--4获取批量导入数据 换了一种写法,可以模糊查询和用课程的between-->
+    <!--2获取批量导入数据 换了一种写法,可以模糊查询和用课程的between-->
     <select id="getOrderSettingByMonth" parameterType="map" resultType="orderSetting">
         /*SELECT *  FROM t_ordersetting WHERE
             DATE_FORMAT( orderDate, '%Y-%m' ) = '${value}'*/
         select * from t_ordersetting where orderDate between #{begin} and #{end}
     </select>
+    <!--3.预约设置:根据时间查询有无预约设置-->
+    <select id="findByOrderDate" parameterType="string" resultType="orderSetting">
+        select * from t_ordersetting where orderDate=#{orderDate}
+    </select>
+    <!--4.editReservationsByOrderDate-->
+    <update id="editReservationsByOrderDate" parameterType="orderSetting" >
+        update t_ordersetting
+        <set>
+            reservations = #{reservations}
+        </set>
+        where orderDate=#{orderDate}
+    </update>
 </mapper>

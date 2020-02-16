@@ -100,7 +100,7 @@
         },
         methods:{
             toOrderInfo(){
-                window.location.href = "orderInfo.html?id=" + id;
+                window.location.href = "../orderInfo.html?id=" + id;
             }
         }
     });

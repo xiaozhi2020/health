@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.itcast.dao.MemberDao">
+    <!--1.根据手机号查询会员:作用于检查用户是否重复预约-->
+    <select id="findByTelephone" parameterType="string" resultType="member">
+        select * from t_member where phoneNumber=#{phoneNumber}
+    </select>
+    <!--2.添加会员-->
+    <insert id="add" parameterType="member">
+        <selectKey keyColumn="id" resultType="int" order="AFTER" keyProperty="id">
+         SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into t_member(fileNumber,name,sex,idCard,phoneNumber,regTime,password,email,birthday,remark)
+         values (#{fileNumber},#{name},#{sex},#{idCard},#{phoneNumber},#{regTime},#{password},#{email},#{birthday},#{remark})
+    </insert>
+</mapper>

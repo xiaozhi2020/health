@@ -33,7 +33,7 @@
             <div class="contentBox">
                 <div class="card">
                     <div class="">
-                        <img :src="'http://pqjroc654.bkt.clouddn.com/'+setmeal.img" width="100%" height="100%" />
+                        <img :src="'http://q5biab01l.bkt.clouddn.com/'+setmeal.img" width="100%" height="100%" />
                     </div>
                     <div class="project-text">
                         <h4 class="tit">{{setmeal.name}}</h4>
@@ -107,18 +107,53 @@
                     setmeal:{},//套餐信息
                     orderInfo:{
                         setmealId:id,
-                        sex:'1'
+                        sex:'1',
+
                     }//预约信息
                 },
                 methods:{
                     //发送验证码
                     sendValidateCode(){
+                        var telephone=this.orderInfo.telephone
+                        if (!checkTelephone(telephone)){
+                            this.$message.error("请输入正确的手机号");
+                            return false;
+                        }
+                        validateCodeButton = $("#validateCodeButton")[0];
+                        clock=window.setInterval(doLoop,1000);
+                        axios.get("/validateCode/send4Order.do?telephone="+telephone).then(res=>{
+                            if (!res.data.flag) {
+                                //短信验证码发送失败
+                                this.$message.error(res.data.message);
+                            }
+                        })
                     },
                     //提交预约
                     submitOrder(){
+                        var idCard= this.orderInfo.idCard;
+                        if (!checkIdCard(idCard)) {
+                            this.$message.error("请输入正确的身份证号!");
+                            return false;
+                        }
+                        axios.post("/order/submit.do",this.orderInfo).then(res=>{
+                            if (res.data.flag) {
+                                //预约成功，跳转到成功页面//预约人和预约是一对多,建立外键了
+                                window.location.href="orderSuccess.html?orderId=" + res.data.data;
+                            }else {
+                                //预约失败，提示信息
+                                this.$message.error(res.data.message);
+                            }
+                        })
                     }
                 },
                 mounted(){
+                    axios.get("/setMeal/findById.do?id="+id).then(res=>{
+                        if (res.data.flag){
+                            this.setmeal=res.data.data;
+                        } else {
+                            this.$message.error(res.data.message);
+                        }
+                    })
                 }
             });
         </script>
