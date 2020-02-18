@@ -6,6 +6,7 @@ import cn.itcast.entity.Result;
 import cn.itcast.pojo.Setmeal;
 
 import java.util.List;
+import java.util.Map;
 
 public interface SetMealService {
     //1.新增套餐
@@ -24,4 +25,6 @@ public interface SetMealService {
     List<Setmeal> getSetMeal();
     //7.手机端套餐详情查询
     Setmeal findDetailById(Integer id);
+    //8.套餐预约占比饼形图,根据套餐查询预约
+    List<Map<String, Object>> findSetmealCount();
 }

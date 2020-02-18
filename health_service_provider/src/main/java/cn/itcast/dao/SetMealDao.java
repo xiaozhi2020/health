@@ -7,6 +7,9 @@ import java.util.List;
 import java.util.Map;
 
 public interface SetMealDao {
+
+
+
     //1.1新增套餐
     void add(Setmeal setmeal);
     //1.2新增套餐关联检查组
@@ -31,4 +34,6 @@ public interface SetMealDao {
     Setmeal findDetailById(Integer id);
     //8.查询总个数
     Integer findAllCount();
+    //9.套餐预约占比饼形图,根据套餐查询预约
+    List<Map<String, Object>> findSetmealCount();
 }

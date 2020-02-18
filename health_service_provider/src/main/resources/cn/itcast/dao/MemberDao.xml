@@ -15,4 +15,8 @@
         insert into t_member(fileNumber,name,sex,idCard,phoneNumber,regTime,password,email,birthday,remark)
          values (#{fileNumber},#{name},#{sex},#{idCard},#{phoneNumber},#{regTime},#{password},#{email},#{birthday},#{remark})
     </insert>
+    <!--3.会员报表查询数量,根据月份-->
+    <select id="findMemberCountByMonths" parameterType="string" resultType="int">
+        select count(*) from t_member where regTime &lt;=#{value}
+    </select>
 </mapper>

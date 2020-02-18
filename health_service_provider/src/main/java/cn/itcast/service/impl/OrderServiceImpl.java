@@ -63,14 +63,14 @@ public class OrderServiceImpl implements OrderService {
             order.setSetmealId(setmealId);
             //查询预约
             List<Order> orderList= orderDao.findByCondition(order);
-            if (orderList!=null){
+            if (orderList!=null&&orderList.size()>0){
                 //用户重复预约
                 return  new Result(false,MessageConstant.HAS_ORDERED);
             }
 
         } else {
             //4、检查当前用户是否为会员，如果是会员则直接完成预约，如果不是会员则自动完成注册并进行预约
-            member = new Member();//防止空指针异常
+            member = new Member();//防止空指针异常//集合查不到不会空指针但是size()=0
             member.setName(orderMessage.getName());
             member.setSex(orderMessage.getSex());
             member.setIdCard(orderMessage.getIdCard());

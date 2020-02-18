@@ -106,8 +106,12 @@
     <select id="findDetailById" parameterType="int" resultMap="findDetailByIdResultMap">
         select * from t_setmeal where id=#{id}
     </select>
-    <!--查询总个数-->
+    <!--8.查询总个数-->
     <select id="findAllCount" resultType="int">
         select count(*) from t_setmeal
+    </select>
+    <!--9.套餐预约占比饼形图,根据套餐查询预约-->
+    <select id="findSetmealCount" resultType="map">
+        select s.name name, count(o.id) value from t_order o,t_setmeal s where o.setmeal_id= s.id GROUP BY s.name
     </select>
 </mapper>

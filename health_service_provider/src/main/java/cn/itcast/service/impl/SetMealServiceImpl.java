@@ -170,6 +170,16 @@ public class SetMealServiceImpl implements SetMealService {
     }
 
     /**
+     * 套餐预约占比饼形图,根据套餐查询预约
+     * @return
+     */
+    @Override
+    public List<Map<String, Object>> findSetmealCount() {
+        List<Map<String, Object>> mapList= setMealDao.findSetmealCount();
+        return mapList;
+    }
+
+    /**
      * 封装新增套餐关联检查组
      * @param setmeal
      * @param checkGroupIds
