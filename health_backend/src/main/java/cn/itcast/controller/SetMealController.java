@@ -25,6 +25,7 @@ import java.util.UUID;
 public class SetMealController {
     @Reference
     private SetMealService setMealService;
+
     @Autowired
     private JedisPool jedisPool;
 

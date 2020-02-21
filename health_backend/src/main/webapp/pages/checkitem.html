@@ -337,10 +337,10 @@
                                 }else {
                                     this.$message.error(res.data.message)
                                 }
+                            }).catch(reason => {
+                                this.showMessage(reason);
                             })
-                        }).catch(reason => {
-                            this.showMessage(reason);
-                    })
+                        })
                         .catch(()=>{
                             this.$message.info("操作已取消!")
                         })
